@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
   post '/tasks' do
     task = Task.create(
       task_name: params[:text],
-      day_time: params[:day]
+      day_time: params[:day],
       use_id: rand(1..20)
     )
     task.to_json
@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
   post '/users' do 
     new_user = User.create(
       name: params[:name],
-      email_address: params[:email]
+      email_address: params[:email],
     )
     new_user.to_json
   end
@@ -35,8 +35,8 @@ class ApplicationController < Sinatra::Base
   patch '/tasks/:id' do
     task = Task.find(params[:id])
     task.update(
-      task_name: params[:text]
-      day_time: params[:day]
+      task_name: params[:text],
+      day_time: params[:day],
       use_id: rand(1..20)
     )
     task.to_json
@@ -54,22 +54,14 @@ class ApplicationController < Sinatra::Base
 
   delete '/tasks/:id' do
     task = Task.find(params[:id])
-    task.destroy(
-      task_name: params[:text]
-      day_time: params[:day]
-      use_id: rand(1..20)
-
-    )
+    task.destroy
     task.to_json
     "Task deleted successfully"
   end
   
   delete '/users/:id' do
     user = User.find(params[:id])
-    user.destroy(
-      name: params[:name],
-      email_address: params[:email]
-    )
+    user.destroy
     user.to_json
     "User deleted successfully"
   end
